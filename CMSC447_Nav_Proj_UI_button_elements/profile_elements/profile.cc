@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   width: 200px;
-  background-color: #0D1117;
+  background-color:rgb(237, 238, 242);
   justify-content: center;
   border-radius: 5px
 }
@@ -11,7 +11,7 @@
   background-color: transparent;
   border: none;
   padding: 10px;
-  color: white;
+  color: grey;
   display: flex;
   position: relative;
   gap: 5px;
