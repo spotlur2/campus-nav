@@ -21,12 +21,12 @@
 
 .value:not(:active):hover,
 .value:focus {
-  background-color: #21262C;
+  background-color:rgb(255, 255, 255);
 }
 
 .value:focus,
 .value:active {
-  background-color: #1A1F24;
+  background-color:rgb(255, 255, 255);
   outline: none;
 }
 
