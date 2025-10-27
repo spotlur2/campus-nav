@@ -24,3 +24,12 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+div {
+  .button {
+    background-color: #FFFFFF;
+    cursor:pointer;
+    padding-top: 108vh;
+    padding-right: 25vh;
+  }
+}
