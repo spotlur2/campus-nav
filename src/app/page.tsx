@@ -14,12 +14,22 @@ export default function Home() {
         //height={100}
         //priority
       />
-        <div className="button">
-         {/* <button className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"> */}
+        <div className="UNICENTERbutton">
             <button>
-            BUTTONTEXT
+            UNIVERSITY CENTER
           </button>
         </div>
+        <div className="COMMONSbutton">
+            <button>
+            THE COMMONS
+          </button>
+        </div>
+        <div className="LOT22button">
+            <button>
+            LOT 22
+          </button>
+        </div>
+        
       {/*
       <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
 
