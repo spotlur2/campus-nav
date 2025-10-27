@@ -29,7 +29,11 @@ export default function Home() {
             LOT 22
           </button>
         </div>
-        
+        <div className="RACbutton">
+            <button>
+            Retriver Activities Center (RAC)
+          </button>
+        </div>
       {/*
       <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
 

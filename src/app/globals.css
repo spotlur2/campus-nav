@@ -60,7 +60,7 @@ div {
     box-shadow:0 8px 16px 0 rgba(0,0,0,0.6);
     background-color: #ffffff;
     cursor:pointer;
-    margin-top: 3vh;
+    margin-top: 13vh;
     margin-left: 10vh;
   }
 }
@@ -74,7 +74,7 @@ div {
     background-color: #fdb515;
     transition-duration: 250ms;
     cursor:pointer;
-    margin-top: 3vh;
+    margin-top: 13vh;
     margin-left: 10vh;
   }
 }
@@ -87,7 +87,7 @@ div {
     box-shadow:0 8px 16px 0 rgba(0,0,0,0.6);
     background-color: #ffffff;
     cursor:pointer;
-    margin-bottom: 90vh;
+    margin-bottom: 70vh;
     margin-right: 160vh;
   }
 }
@@ -101,10 +101,12 @@ div {
     background-color: #fdb515;
     transition-duration: 250ms;
     cursor:pointer;
-    margin-bottom: 90vh;
+    margin-bottom: 70vh;
     margin-right: 160vh;
   }
 }
+
+
 
 
 /*     background-color: #fdb515; */
