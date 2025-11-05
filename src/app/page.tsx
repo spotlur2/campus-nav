@@ -6,7 +6,6 @@ import Map from "../components/Map";
 export default function Home() {
   return (
     <div className="App">
-      <h1>Hello World!</h1>
       <Map />
     </div>
   );
