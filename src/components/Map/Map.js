@@ -26,6 +26,7 @@ const centerPhys = [39.254448, -76.709589];
 const centerPUP = [39.255166, -76.709107];
 const centerWellBeing = [39.256064, -76.708909];
 const centerPAHB = [39.25522, -76.715312];
+const centerBioSci = [39.254690, -76.712221];
 
 function Map(){
     return(
@@ -96,6 +97,10 @@ function Map(){
             <Circle center={centerILSB} pathOptions={fillBlueOptions} radius={30}>
                 <Popup>This is the ILSB</Popup>
             </Circle>
+            <Circle center={centerBioSci} pathOptions={fillBlueOptions} radius={20}>
+                <Popup>This is the Biological Sciences Buidling</Popup>
+            </Circle>
+
         </MapContainer>
 
 
