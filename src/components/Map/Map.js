@@ -1,7 +1,15 @@
+'use client'
 import 'leaflet/dist/leaflet.css';
-import { MapContainer, TileLayer } from 'react-leaflet';
+import { MapContainer, TileLayer, Popup, Circle, Button, CircleMarker} from 'react-leaflet';
 import style from '../Map/map.module.css';
 import * as L from "leaflet";
+
+const fillBlueOptions = { fillColor: 'blue' }
+
+const centerLibrary = [39.256510, -76.711616];
+const centerRAC = [39.252813, -76.712444];
+const centerAdmin = [39.253056, -76.713491];
+const centerITE = [39.253845, -76.714270];
 
 function Map(){
     return(
@@ -18,9 +26,22 @@ function Map(){
                 attribution= '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
                 url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
-
-            const svgElement
+            <Circle center={centerLibrary} pathOptions={fillBlueOptions} radius={55}>
+                <Popup>This is the library</Popup>
+            </Circle>
+            <Circle center={centerRAC} pathOptions={fillBlueOptions} radius={50}>
+                <Popup>This is the RAC</Popup>
+            </Circle>
+            <Circle center={centerAdmin} pathOptions={fillBlueOptions} radius={20}>
+                <Popup>This is the Admin Building</Popup>
+            </Circle>
+            <Circle center={centerITE} pathOptions={fillBlueOptions} radius={35}>
+                <Popup>This is the ITE building</Popup>
+            </Circle>
         </MapContainer>
+
+
+
     );
 }
 
