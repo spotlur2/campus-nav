@@ -9,28 +9,14 @@
     "lint": "eslint"
   },
   "dependencies": {
-<<<<<<< Updated upstream
-    "leaflet": "^1.9.4",
-<<<<<<< HEAD
-    "neo4j-driver": "^6.0.0",
-    "next": "15.5.3",
-    "react": "19.1.0",
-    "react-dom": "19.1.0"
-=======
-    "next": "^15.5.6",
-    "react": "^19.0.0-rc.1",
-    "react-dom": "^19.0.0-rc.1",
-    "react-leaflet": "^5.0.0-rc.2"
->>>>>>> RestartMapInit
-=======
     "firebase": "^12.5.0",
     "leaflet": "^1.9.4",
+    "neo4j": "^2.0.0-RC2",
     "neo4j-driver": "^6.0.1",
-    "next": "15.5.3",
-    "react": "19.1.0",
-    "react-dom": "19.1.0",
-    "react-leaflet": "^5.0.0"
->>>>>>> Stashed changes
+    "next": "^15.5.6",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "react-leaflet": "^5.0.0-rc.2"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
