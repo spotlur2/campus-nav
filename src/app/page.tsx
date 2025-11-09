@@ -1,12 +1,16 @@
-import Image from "next/image";
-import Head from "next/head";
-import "./globals.css";
-import Map from "../components/Map";
+'use client'
+
+import dynamic from 'next/dynamic';
+import { useState, useEffect } from 'react';
+
+const Map = dynamic(() => import('../components/Map'), { ssr: false });
 
 export default function Home() {
-  return (
-    <div className="App">
-      <Map />
-    </div>
-  );
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  return <div className="App">{mounted && <Map />}</div>;
 }
