@@ -10,10 +10,17 @@
   },
   "dependencies": {
     "leaflet": "^1.9.4",
+<<<<<<< HEAD
     "neo4j-driver": "^6.0.0",
     "next": "15.5.3",
     "react": "19.1.0",
     "react-dom": "19.1.0"
+=======
+    "next": "^15.5.6",
+    "react": "^19.0.0-rc.1",
+    "react-dom": "^19.0.0-rc.1",
+    "react-leaflet": "^5.0.0-rc.2"
+>>>>>>> RestartMapInit
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
