@@ -1,12 +1,11 @@
 'use client'
 
 import 'leaflet/dist/leaflet.css';
-import { MapContainer, TileLayer, Circle, useMap, Popup } from 'react-leaflet';
+import { MapContainer, TileLayer, Circle, useMap, Polyline } from 'react-leaflet';
 import style from './map.module.css';
 import { useEffect, useState } from 'react';
 import { getFirestore, doc, getDoc } from 'firebase/firestore';
 import { initializeApp, getApps } from 'firebase/app';
-import L from 'leaflet';
 
 // FIREBASE INITIALIZATION
 const firebaseConfig = {
@@ -44,41 +43,68 @@ const POIS = [
 ];
 
 const fillBlueOptions = { fillColor: 'blue' };
-
-// Center map on user location
-function LocationMarker({ setUserLocation }) {
-  const [position, setPosition] = useState(null);
-  const map = useMap();
-
-  useEffect(() => {
-    if (typeof window === 'undefined' || !navigator.geolocation) return;
-    navigator.geolocation.getCurrentPosition((pos) => {
-      const coords = [pos.coords.latitude, pos.coords.longitude];
-      setPosition(coords);
-      setUserLocation(coords);
-      map.setView(coords, 16);
-    });
-  }, [map, setUserLocation]);
-
-  return position ? <Circle center={position} pathOptions={fillBlueOptions} radius={10} /> : null;
-}
-
 const daysOrder = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
 
 // Format time from 2400 to 12-hour format
 function formatTime(hourNum) {
   if (hourNum === 2400) return '12:00 AM';
-
   const str = hourNum.toString().padStart(4, '0');
   let hours = parseInt(str.slice(0, 2), 10);
   const minutes = parseInt(str.slice(2), 10);
-
   const ampm = hours >= 12 ? 'PM' : 'AM';
-  hours = hours % 12;
-  if (hours === 0) hours = 12;
-
-  return `${hours}:${minutes.toString().padStart(2, '0')} ${ampm}`;
+  hours = hours % 12 || 12;
+  return `${hours}:${minutes.toString().padStart(2,'0')} ${ampm}`;
 }
+
+// Center map on user location
+function LocationMarker({ setUserLocation }) {
+  const [position, setPosition] = useState(null);
+  const map = useMap();
+  const defaultCoords = [39.255632, -76.710665];
+
+  useEffect(() => {
+    if (!map) return;
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (pos) => {
+          const coords = [pos.coords.latitude, pos.coords.longitude];
+          setPosition(coords);
+          setUserLocation(coords);
+          map.flyTo(coords, 16);
+        },
+        () => {
+          setPosition(defaultCoords);
+          map.flyTo(defaultCoords, 16);
+        },
+        { enableHighAccuracy: true, timeout: 5000 }
+      );
+    } else {
+      setPosition(defaultCoords);
+      map.flyTo(defaultCoords, 16);
+    }
+  }, [map, setUserLocation]);
+
+  return position ? <Circle center={position} pathOptions={fillBlueOptions} radius={10} /> : null;
+}
+
+// Component for rendering the route and auto-zooming
+function RoutePolyline({ path }) {
+  const map = useMap();
+
+  // Filter out invalid nodes
+  const validPath = path?.filter(p => p && typeof p.lat === 'number' && typeof p.long === 'number');
+
+  useEffect(() => {
+    if (validPath && validPath.length > 0) {
+      map.fitBounds(validPath.map(p => [p.lat, p.long]));
+    }
+  }, [validPath, map]);
+
+  return validPath && validPath.length > 0
+    ? <Polyline positions={validPath.map(p => [p.lat, p.long])} color="red" weight={4} />
+    : null;
+}
+
 
 // MAIN MAP COMPONENT
 export default function Map() {
@@ -86,18 +112,16 @@ export default function Map() {
   const [userLocation, setUserLocation] = useState(null);
   const [poiData, setPoiData] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [path, setPath] = useState(null);
 
   const handlePOIClick = async (poiName) => {
     setLoading(true);
     setSelectedPOI(poiName);
-
     try {
       const docRef = doc(db, 'searchBar', poiName);
       const docSnap = await getDoc(docRef);
-
-      if (docSnap.exists()) {
-        setPoiData(docSnap.data());
-      } else {
+      if (docSnap.exists()) setPoiData(docSnap.data());
+      else {
         setPoiData({});
         console.warn(`No document found for: ${poiName}`);
       }
@@ -112,6 +136,26 @@ export default function Map() {
   const closePopup = () => {
     setSelectedPOI(null);
     setPoiData(null);
+    setPath(null);
+  };
+
+  const navigateToPOI = async () => {
+    if (!userLocation || !selectedPOI) return;
+    setLoading(true);
+    try {
+      const res = await fetch('/api/route', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ userLocation, endPOI: selectedPOI }),
+      });
+      const data = await res.json();
+      if (data.path) setPath(data.path);
+      else console.warn('No path returned from Neo4j');
+    } catch (err) {
+      console.error('Error fetching path:', err);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -120,7 +164,7 @@ export default function Map() {
         className={style.map}
         center={[39.255632, -76.710665]}
         zoom={16}
-        scrollWheelZoom={true}
+        scrollWheelZoom
         minZoom={16}
         maxZoom={18}
       >
@@ -128,21 +172,17 @@ export default function Map() {
           attribution='&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
           url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-
         <LocationMarker setUserLocation={setUserLocation} />
-
-        {POIS.map((poi) => (
+        {POIS.map(poi => (
           <Circle
             key={poi.name}
             center={poi.center}
             pathOptions={fillBlueOptions}
             radius={poi.radius}
-            eventHandlers={{
-              click: () => handlePOIClick(poi.name),
-            }}
-          >
-          </Circle>
+            eventHandlers={{ click: () => handlePOIClick(poi.name) }}
+          />
         ))}
+        {path && <RoutePolyline path={path} />}
       </MapContainer>
 
       {/* Bottom Popup */}
@@ -170,32 +210,23 @@ export default function Map() {
 
           {poiData.hours && typeof poiData.hours === 'object' && (
             <table>
-                <tbody>
+              <tbody>
                 {daysOrder.map(day => {
-                    const times = poiData.hours?.[day];
-                    if (!Array.isArray(times) || times.length < 2) return null;
-
-                    const [open, close] = times;
-                    const display =
-                    open === 0 && close === 0
-                        ? 'Closed'
-                        : `${formatTime(open)} - ${formatTime(close)}`;
-                    return (
+                  const times = poiData.hours?.[day];
+                  if (!Array.isArray(times) || times.length < 2) return null;
+                  const [open, close] = times;
+                  const display = open === 0 && close === 0 ? 'Closed' : `${formatTime(open)} - ${formatTime(close)}`;
+                  return (
                     <tr key={day}>
-                        <td>{day}</td>
-                        <td>{display}</td>
+                      <td>{day}</td>
+                      <td>{display}</td>
                     </tr>
-                    );
+                  );
                 })}
-                </tbody>
+              </tbody>
             </table>
-            )}
-
-          <button
-            onClick={() => alert('Navigation started!')}
-          >
-            Navigate
-          </button>
+          )}
+          <button onClick={navigateToPOI}>Navigate</button>
         </div>
       )}
 
