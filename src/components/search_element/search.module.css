@@ -1,4 +1,4 @@
-.search-label {
+.searchLabel {
   display: flex;
   align-items: center;
   box-sizing: border-box;
@@ -6,21 +6,21 @@
   border: 1px solid transparent;
   border-radius: 12px;
   overflow: hidden;
-  background:rgb(204, 211, 214);
+  background: rgb(204, 211, 214);
   padding: 9px;
   cursor: text;
 }
 
-.search-label:hover {
+.searchLabel:hover {
   border-color: gray;
 }
 
-.search-label:focus-within {
-  background:rgba(255, 255, 255, 0.96);
+.searchLabel:focus-within {
+  background: rgba(255, 255, 255, 0.96);
   border-color: grey;
 }
 
-.search-label input {
+.input {
   outline: none;
   width: 100%;
   border: none;
@@ -28,27 +28,27 @@
   color: rgb(162, 162, 162);
 }
 
-.search-label input:focus+.slash-icon,
-.search-label input:valid+.slash-icon {
+.input:focus + .slashIcon,
+.input:valid + .slashIcon {
   display: none;
 }
 
-.search-label input:valid~.search-icon {
+.input:valid ~ .searchIcon {
   display: block;
 }
 
-.search-label input:valid {
+.input:valid {
   width: calc(100% - 22px);
   transform: translateX(20px);
 }
 
-.search-label svg,
-.slash-icon {
+.searchIcon,
+.slashIcon {
   position: absolute;
   color: #7e7e7e;
 }
 
-.search-icon {
+.searchIcon {
   display: none;
   width: 12px;
   height: auto;
