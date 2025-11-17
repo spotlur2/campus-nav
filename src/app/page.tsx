@@ -3,7 +3,7 @@
 import dynamic from 'next/dynamic';
 import SearchBar from '../components/search_element/SearchBar';
 import FilterButton from '../components/filter_element/FilterButton';
-import ProfileSelector from '../components/profile_elements/ProfileButtons'; // <-- add your import
+import ProfileSelector from '../components/profile_elements/ProfileButtons';
 
 const Map = dynamic(() => import('../components/Map'), { ssr: false });
 
@@ -11,7 +11,7 @@ export default function Home() {
   return (
     <main className="relative h-screen w-screen flex flex-col">
 
-      {/* Top-left Profile Radio Buttons */}
+      {/* Top-right Profile Radio Buttons */}
       <div className="fixed top-4 right-4 z-[9999]">
         <ProfileSelector />
       </div>
