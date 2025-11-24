@@ -4,10 +4,18 @@ import dynamic from 'next/dynamic';
 import SearchBar from '../components/search_element/SearchBar';
 import FilterButton from '../components/filter_element/FilterButton';
 import ProfileSelector from '../components/profile_elements/ProfileButtons';
+import { useState } from 'react';
 
 const Map = dynamic(() => import('../components/Map'), { ssr: false });
 
 export default function Home() {
+  const [selectedPOI, setSelectedPOI] = useState<string | null>(null);
+
+  const handleSearchSelect = (poiName: string) => {
+    console.log("Selected from search:", poiName);
+    setSelectedPOI(poiName);     // Send POI name to Map
+  };
+
   return (
     <main className="relative h-screen w-screen flex flex-col">
 
@@ -18,10 +26,7 @@ export default function Home() {
 
       {/* Top Search Bar */}
       <div className="fixed top-4 left-1/2 transform -translate-x-1/2 z-[9999] w-[300px]">
-        <SearchBar
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            console.log('Search:', e.target.value)}
-        />
+        <SearchBar onSelect={handleSearchSelect} />
       </div>
 
       {/* Bottom-right Filter Button */}
@@ -31,7 +36,10 @@ export default function Home() {
 
       {/* Fullscreen Map */}
       <div className="App">
-        <Map />
+        <Map 
+          selectedPOI={selectedPOI} 
+          onClearSelectedPOI={() => setSelectedPOI(null)}
+        />
       </div>
 
     </main>

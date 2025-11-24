@@ -6,6 +6,7 @@ import style from './map.module.css';
 import { useEffect, useState } from 'react';
 import { getFirestore, doc, getDoc } from 'firebase/firestore';
 import { initializeApp, getApps } from 'firebase/app';
+import POIPopup from '../popup/POIPopup';
 
 // FIREBASE INITIALIZATION
 const firebaseConfig = {
@@ -20,7 +21,7 @@ const firebaseConfig = {
 if (!getApps().length) initializeApp(firebaseConfig);
 const db = getFirestore();
 
-// DATA
+// STATIC POIS
 const POIS = [
   { name: 'Albin O. Kuhn Library & Gallery', center: [39.256510, -76.711616], radius: 55 },
   { name: 'Retriever Activities Center', center: [39.252813, -76.712444], radius: 50 },
@@ -43,20 +44,8 @@ const POIS = [
 ];
 
 const fillBlueOptions = { fillColor: 'blue' };
-const daysOrder = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
 
-// Format time from 2400 to 12-hour format
-function formatTime(hourNum) {
-  if (hourNum === 2400) return '12:00 AM';
-  const str = hourNum.toString().padStart(4, '0');
-  let hours = parseInt(str.slice(0, 2), 10);
-  const minutes = parseInt(str.slice(2), 10);
-  const ampm = hours >= 12 ? 'PM' : 'AM';
-  hours = hours % 12 || 12;
-  return `${hours}:${minutes.toString().padStart(2,'0')} ${ampm}`;
-}
-
-// Center map on user location
+// LOCATION MARKER
 function LocationMarker({ setUserLocation }) {
   const [position, setPosition] = useState(null);
   const map = useMap();
@@ -87,11 +76,9 @@ function LocationMarker({ setUserLocation }) {
   return position ? <Circle center={position} pathOptions={fillBlueOptions} radius={10} /> : null;
 }
 
-// Component for rendering the route and auto-zooming
+// ROUTE POLYLINE
 function RoutePolyline({ path }) {
   const map = useMap();
-
-  // Filter out invalid nodes
   const validPath = path?.filter(p => p && typeof p.lat === 'number' && typeof p.long === 'number');
 
   useEffect(() => {
@@ -105,52 +92,61 @@ function RoutePolyline({ path }) {
     : null;
 }
 
+// FLY TO POI
+function FlyToPOI({ coords }) {
+  const map = useMap();
+  useEffect(() => {
+    if (coords) map.flyTo(coords, 18);
+  }, [coords, map]);
+  return null;
+}
 
-// MAIN MAP COMPONENT
-export default function Map() {
-  const [selectedPOI, setSelectedPOI] = useState(null);
+// MAIN MAP
+export default function Map({ selectedPOI: externalPOI }) {
+  // Combine name + data into one object
+  const [poiState, setPoiState] = useState({
+    name: null,
+    data: null,
+    coords: null
+  });
   const [userLocation, setUserLocation] = useState(null);
-  const [poiData, setPoiData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [path, setPath] = useState(null);
 
   const handlePOIClick = async (poiName) => {
     setLoading(true);
-    setSelectedPOI(poiName);
     try {
-      const docRef = doc(db, 'searchBar', poiName);
-      const docSnap = await getDoc(docRef);
-      if (docSnap.exists()) setPoiData(docSnap.data());
-      else {
-        setPoiData({});
-        console.warn(`No document found for: ${poiName}`);
-      }
+      const docSnap = await getDoc(doc(db, 'searchBar', poiName));
+      const data = docSnap.exists() ? docSnap.data() : {};
+      const poiCoords = POIS.find(p => p.name === poiName)?.center || null;
+      setPoiState({ name: poiName, data, coords: poiCoords });
     } catch (err) {
       console.error('Error fetching POI data:', err);
-      setPoiData({});
+      const poiCoords = POIS.find(p => p.name === poiName)?.center || null;
+      setPoiState({ name: poiName, data: {}, coords: poiCoords });
     } finally {
       setLoading(false);
     }
   };
 
-  const closePopup = () => {
-    setSelectedPOI(null);
-    setPoiData(null);
-    setPath(null);
-  };
+  // Handle search selection
+  useEffect(() => {
+    if (externalPOI) handlePOIClick(externalPOI);
+  }, [externalPOI]);
+
+  const closePopup = () => setPoiState({ name: null, data: null, coords: null });
 
   const navigateToPOI = async () => {
-    if (!userLocation || !selectedPOI) return;
+    if (!userLocation || !poiState.name) return;
     setLoading(true);
     try {
       const res = await fetch('/api/route', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ userLocation, endPOI: selectedPOI }),
+        body: JSON.stringify({ userLocation, endPOI: poiState.name }),
       });
       const data = await res.json();
       if (data.path) setPath(data.path);
-      else console.warn('No path returned from Neo4j');
     } catch (err) {
       console.error('Error fetching path:', err);
     } finally {
@@ -169,10 +165,13 @@ export default function Map() {
         maxZoom={18}
       >
         <TileLayer
-          attribution='&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+          attribution='&copy; OpenStreetMap'
           url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
+
         <LocationMarker setUserLocation={setUserLocation} />
+        <FlyToPOI coords={poiState.coords} />
+
         {POIS.map(poi => (
           <Circle
             key={poi.name}
@@ -182,59 +181,18 @@ export default function Map() {
             eventHandlers={{ click: () => handlePOIClick(poi.name) }}
           />
         ))}
+
         {path && <RoutePolyline path={path} />}
       </MapContainer>
 
-      {/* Bottom Popup */}
-      {selectedPOI && poiData && !loading && (
-        <div className={style.bottomPopup}>
-          <button
-            onClick={closePopup}
-            style={{
-              position: 'absolute',
-              top: '-10px',
-              right: '12px',
-              background: 'transparent',
-              border: 'none',
-              fontSize: '1.5rem',
-              cursor: 'pointer',
-              color: '#555',
-            }}
-          >
-            ×
-          </button>
-          <h3>{selectedPOI}</h3>
-          {poiData.description && <p>{poiData.description}</p>}
-          {poiData.floor && <p>Floor: {poiData.floor}</p>}
-          {poiData.room && <p>Room Number: {poiData.room}</p>}
-
-          {poiData.hours && typeof poiData.hours === 'object' && (
-            <table>
-              <tbody>
-                {daysOrder.map(day => {
-                  const times = poiData.hours?.[day];
-                  if (!Array.isArray(times) || times.length < 2) return null;
-                  const [open, close] = times;
-                  const display = open === 0 && close === 0 ? 'Closed' : `${formatTime(open)} - ${formatTime(close)}`;
-                  return (
-                    <tr key={day}>
-                      <td>{day}</td>
-                      <td>{display}</td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
-          )}
-          <button onClick={navigateToPOI}>Navigate</button>
-        </div>
-      )}
-
-      {/* Loading Data */}
-      {loading && selectedPOI && (
-        <div className={style.bottomPopup}>
-          <h3>Loading {selectedPOI}...</h3>
-        </div>
+      {poiState.name && (
+        <POIPopup
+          poiName={poiState.name}
+          poiData={poiState.data}
+          loading={loading}
+          onClose={closePopup}
+          onNavigate={navigateToPOI}
+        />
       )}
     </div>
   );
