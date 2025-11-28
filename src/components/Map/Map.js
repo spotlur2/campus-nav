@@ -22,28 +22,9 @@ if (!getApps().length) initializeApp(firebaseConfig);
 const db = getFirestore();
 
 // DATA
-const AcademicPOIS = [
-  { name: 'Albin O. Kuhn Library & Gallery', center: [39.256510, -76.711616], radius: 55 },
-  { name: 'Retriever Activities Center', center: [39.252813, -76.712444], radius: 50 },
-  //{ name: 'Administration Building', center: [39.253056, -76.713491], radius: 20 },
-  //{ name: 'Information Technology and Engineering Building', center: [39.253845, -76.714270], radius: 35 },
-  //{ name: 'Engineering Building', center: [39.254540, -76.7139501], radius: 35 },
-  //{ name: 'Fine Arts Building', center: [39.255173, -76.7136548], radius: 35 },
-  //{ name: 'Meyerhoff Chemistry Building', center: [39.254917, -76.712790], radius: 35 },
-  //{ name: 'University Center', center: [39.254291, -76.713233], radius: 30 },
-  //{ name: 'Sherman Hall', center: [39.253636, -76.713423], radius: 37 },
-  { name: 'Sondheim Hall', center: [39.253441, -76.712769], radius: 25 },
-  { name: 'Math and Psychology Building', center: [39.254107, -76.712454], radius: 20 },
-  { name: 'Interdisciplinary Life Sciences Building', center: [39.253916, -76.710854], radius: 30 },
-  { name: 'The Commons', center: [39.254916, -76.711014], radius: 40 },
-  { name: 'Physics Building', center: [39.254448, -76.709589], radius: 30 },
-  { name: 'Public Policy Building', center: [39.255166, -76.709107], radius: 30 },
-  { name: 'The Center for Well-Being', center: [39.256064, -76.708909], radius: 25 },
-  { name: 'Performing Arts and Humanities Building', center: [39.25522, -76.715312], radius: 70 },
-  { name: 'Biological Sciences Building', center: [39.254690, -76.712221], radius: 20 },
-];
 
-
+//X: + goes up, - goes down
+//Y: more neg goes left, more pos goes right
 const AcademicOverlays = [
   { name: 'Information Technology and Engineering Building', url: 'https://upload.wikimedia.org/wikipedia/commons/2/22/ITE_%281%29.png', bounds:[[39.254205, -76.714465],[39.25401, -76.713828], [39.253440, -76.714078], [39.253635, -76.71473]], z: 1, opac: .3, interact: true},
   { name: 'Engineering Building', url: 'https://upload.wikimedia.org/wikipedia/commons/6/6f/EngineeringUMBC.png', bounds:[[39.254170535654, -76.7143764200593], [39.25486763981565, -76.71353167818892]], z: 1, opac: .3, interact: true},
@@ -52,19 +33,23 @@ const AcademicOverlays = [
   { name: 'University Center', url: 'https://upload.wikimedia.org/wikipedia/commons/3/31/UcUMBC.png', bounds:[[39.25400844095874, -76.71350852128446], [39.2546664490429, -76.71299035868697]], z: 1, opac: .3, interact: true},
   { name: 'Sherman Hall', url: 'https://upload.wikimedia.org/wikipedia/commons/8/86/Sherman.png', bounds:[[39.253276205528325, -76.71388534517192], [39.254008874476906, -76.71295873676108]], z: 1, opac: .3, interact: true},
   { name: 'Administration Building', url: 'https://upload.wikimedia.org/wikipedia/commons/5/50/AdminUMBC.png', bounds:[[39.25288071492984, -76.71371788581409], [39.25323758702623, -76.713269086354]], z: 1, opac: .3, interact: true},
-
+  { name: 'Sondheim Hall', url: 'https://upload.wikimedia.org/wikipedia/commons/5/55/Sondheim.png', bounds:[[39.25316715300227, -76.71303660729053],[39.25377010732074, -76.71254425292532]], z: 1, opac: .3, interact: true},
+  { name: 'Interdisciplinary Life Sciences Building', url: 'https://upload.wikimedia.org/wikipedia/commons/e/e9/Umbcilsb.png', bounds:[[39.25368099319077, -76.7113194480998],[39.25421944687733, -76.71037440847265]], z: 1, opac: .3, interact: true},
+  { name: 'Physics Building', url: 'https://upload.wikimedia.org/wikipedia/commons/8/8f/Umbcphys.png', bounds:[[39.25420413335488, -76.70991836024124],[39.25476944758286, -76.70922680804943]], z: 1, opac: .3, interact: true},
+  { name: 'Math and Psychology Building', url: 'https://upload.wikimedia.org/wikipedia/commons/b/bf/Umbcmath.png', bounds:[[39.25380247455104, -76.71271463594683],[39.25440455099473, -76.7122295181268]], z: 1, opac: .3, interact: true},
+  { name: 'Biological Sciences Building', url: 'https://upload.wikimedia.org/wikipedia/commons/4/41/Umbcbio.png', bounds:[[39.2544482682781, -76.71244959766986],[39.25544873063857, -76.71171810444133]], z: 1, opac: .3, interact: true},
+  { name: 'Performing Arts and Humanities Building', url: 'https://upload.wikimedia.org/wikipedia/commons/4/4b/Umbcpahb.png', bounds:[[39.25478540477454, -76.71613774852261],[39.25584358802797, -76.71459984384417]], z: 1, opac: .3, interact: true},
+  { name: 'Albin O. Kuhn Library & Gallery', url: 'https://upload.wikimedia.org/wikipedia/commons/3/3f/Umbclib.png', bounds:[[39.25606674446351, -76.71246210741242],[39.25707974464078, -76.7107067198907]], z: 1, opac: .3, interact: true},
+  { name: 'Public Policy Building', url: 'https://upload.wikimedia.org/wikipedia/commons/6/65/Umbcpup.png', bounds:[[39.2549825212351, -76.7095150211758],[39.25541790150362, -76.70874270143506]], z: 1, opac: .3, interact: true},
 ];
 
-//ORDER SHOULD GO TOP LEFT, TOP RIGHT, BOTTOM RIGHT, BOTTOM LEFT
 //X: + goes up, - goes down
 //Y: more neg goes left, more pos goes right
-// const AcademicPolygon = [
-//   { name: 'Engineering Building', positions: [[39.2548813, -76.71415], [39.2547098, -76.71353], [39.254174, -76.713775], [39.25435700535654, -76.7144264200593] ]},
-//   { name: 'Information Technology and Engineering Building', positions: [[39.254189, -76.714465],[39.25401, -76.713815], [39.253460, -76.714078], [39.253635, -76.71473]] },
-//   { name: 'Fine Arts Building', positions: [[39.255563, -76.713865], [39.255368295739974, -76.71319129273988], [39.25479648550013, -76.71346085473921], [39.25498548685964, -76.71413677139425] ]},
-//   { name: 'Meyerhoff Chemistry Building', positions: [[39.25531156492454, -76.71302365466272], [39.25514333375251, -76.71235846684347], [39.25452232877047, -76.71258913681304], [39.25474352348338, -76.71328919334863] ]},
-// ];
-
+const RecOverlays = [
+  { name: 'The Center for Well-Being', url: 'https://upload.wikimedia.org/wikipedia/commons/c/c4/Umbchealth.png', bounds:[[39.255878452374325, -76.70916505097642],[39.25624054142026, -76.70866669869644]], z: 1, opac: .3, interact: true},
+  { name: 'Retriever Activities Center', url: 'https://upload.wikimedia.org/wikipedia/commons/c/c3/Umbcrac.png', bounds:[[39.252307057669926, -76.7131793184523],[39.253406400018686, -76.71192710981711]], z: 1, opac: .3, interact: true},
+  { name: 'The Commons', url: 'https://upload.wikimedia.org/wikipedia/commons/7/70/Umbccommons.png', bounds:[[39.25441036651792, -76.71163912443332],[39.2553225267232, -76.71047918566166]], z: 1, opac: .3, interact: true},
+]
 const ParkingPOIs = [
   {name: 'Administration Drive Garage', center: [39.252050,-76.712743], radius: 20},
   {name: 'Commons Drive Garage', center: [39.253459351003,-76.70958436380637], radius: 20},
@@ -206,6 +191,10 @@ export default function Map() {
         minZoom={16}
         maxZoom={18}
       >
+        {/* sets the user location in the map */}
+        <LocationMarker setUserLocation={setUserLocation} />
+
+        {/* controls the overlays for the academic buildings */}
         {AcademicOverlays.map(poi => (
           <ImageOverlay
             key={poi.name}
@@ -217,21 +206,24 @@ export default function Map() {
             eventHandlers={{ click: () => handlePOIClick(poi.name) }}
           />
         ))}
-
+        {/* controls the overlays for the recreation buildings */}
+        {RecOverlays.map(poi => (
+          <ImageOverlay
+            key={poi.name}
+            interactive={poi.interact}
+            url={poi.url}
+            bounds={poi.bounds}
+            opacity={poi.opac}
+            zIndex={poi.z}
+            eventHandlers={{ click: () => handlePOIClick(poi.name) }}
+          />
+        ))}
         <TileLayer
           attribution='&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
           url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        <LocationMarker setUserLocation={setUserLocation} />
-        {AcademicPOIS.map(poi => (
-          <Circle
-            key={poi.name}
-            center={poi.center}
-            pathOptions={fillBlueOptions}
-            radius={poi.radius}
-            eventHandlers={{ click: () => handlePOIClick(poi.name) }}
-          />
-        ))}
+
+
         {path && <RoutePolyline path={path} />}
       </MapContainer>
 
