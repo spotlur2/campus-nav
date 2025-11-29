@@ -1,12 +1,20 @@
 'use client'
 
 import 'leaflet/dist/leaflet.css';
-import { MapContainer, TileLayer, Circle, Rectangle, Polygon, useMap, Polyline, ImageOverlay, SVGOverlay } from 'react-leaflet';
+import { MapContainer, TileLayer, Circle, Marker, Polygon, useMap, Polyline, ImageOverlay, SVGOverlay } from 'react-leaflet';
 import style from './map.module.css';
 import { useEffect, useState } from 'react';
 import { getFirestore, doc, getDoc } from 'firebase/firestore';
 import { initializeApp, getApps } from 'firebase/app';
 import Image from 'next/image';
+
+delete L.Icon.Default.prototype._getIconUrl;
+
+L.Icon.Default.mergeOptions({
+    iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png'),
+    iconUrl: require('leaflet/dist/images/marker-icon.png'),
+    shadowUrl: require('leaflet/dist/images/marker-shadow.png')
+});
 
 // FIREBASE INITIALIZATION
 const firebaseConfig = {
@@ -51,17 +59,33 @@ const RecOverlays = [
   { name: 'The Commons', url: 'https://upload.wikimedia.org/wikipedia/commons/7/70/Umbccommons.png', bounds:[[39.25441036651792, -76.71163912443332],[39.2553225267232, -76.71047918566166]], z: 1, opac: .3, interact: true},
 ]
 const ParkingPOIs = [
-  {name: 'Administration Drive Garage', center: [39.252050,-76.712743], radius: 20},
-  {name: 'Commons Drive Garage', center: [39.253459351003,-76.70958436380637], radius: 20},
-  {name: 'Walker Avenue Garage', center: [39.25733967577822,-76.71237861482834], radius: 20},
-  {name: 'Lot 1', center: [39.25350888249007,-76.70850292273148], radius: 20},
-  {name: 'Lot 2', center: [39.25429432478357,-76.70889844576566], radius: 20},
-  {name: 'Lot 3', center: [39.253973233085304,-76.70746307991577], radius: 20},
-  {name: 'Lot 4', center: [39.25482782773867,-76.70827964359925], radius: 20},
-  {name: 'Lot 5', center: [39.25772810832697,-76.70802358617365], radius: 20},
-  {name: 'Lot 6', center: [39.25874588231905,-76.71139193648042], radius: 20},
-  {name: 'Lot 7', center: [39.25712546791812,-76.71060763258053], radius: 20},
-  {name: 'Lot 8', center: [39.2561151240322,-76.71562438201605], radius: 20},
+  {name: 'Administration Drive Garage', center: [39.252050,-76.712743]},
+  {name: 'Commons Drive Garage', center: [39.253459351003,-76.70988436380637]},
+  {name: 'Walker Avenue Garage', center: [39.25733967577822,-76.71237861482834]},
+  {name: 'Lot 1', center: [39.25350888249007,-76.70850292273148]},
+  {name: 'Lot 2', center: [39.25429432478357,-76.70889844576566]},
+  {name: 'Lot 3', center: [39.25442580927875, -76.70766078138759]},
+  {name: 'Lot 4', center: [39.25482782773867,-76.70827964359925]},
+  {name: 'Lot 5', center: [39.25772810832697,-76.70802358617365]},
+  {name: 'Lot 6', center: [39.25862386427897, -76.7110124390106]},
+  {name: 'Lot 7', center: [39.25712546791812,-76.71060763258053]},
+  {name: 'Lot 8', center: [39.2561151240322,-76.71562438201605]},
+  {name: 'Lot 9', center: [39.25449255925222, -76.71517675194633]},
+  {name: 'Lot 10', center: [39.2577756078262, -76.7137077575889]},
+  {name: 'Lot 11', center: [39.25621233852476,-76.70815496697239]},
+  {name: 'Lot 12', center: [39.25641587432619,-76.70681118027422]},
+  {name: 'Lot 20', center: [39.2608297948732,-76.7143695522274]},
+  {name: 'Lot 21', center: [39.25928061307836,-76.7150822753429]},
+  {name: 'Lot 22', center: [39.25739636783017,-76.7179582584592]},
+  {name: 'Lot 23', center: [39.25481572114567,-76.70522967468509]},
+  {name: 'Lot 24', center: [39.254277278232266,-76.70423129796498]},
+  {name: 'Lot 25', center: [39.254646723523116,-76.70283922922277]},
+  {name: 'Lot 26', center: [39.25262678861871,-76.70484493718644]},
+  {name: 'Lot 27', center: [39.252273696860556,-76.70625577907481]},
+  {name: 'Lot 28', center: [39.25139719081476,-76.70709799266281]},
+  {name: 'Lot 29', center: [39.25845892861631,-76.71615977632929]},
+  {name: 'Lot 30', center: [39.25836982624469,-76.71721817770758]},
+  {name: 'Lot 31', center: [39.259851677140674,-76.71462441699336]},
 ]
 
 const fillBlueOptions = { fillOpacity: .16, fillColor: 'blue', color: '' };
@@ -136,6 +160,15 @@ export default function Map() {
   const [loading, setLoading] = useState(false);
   const [path, setPath] = useState(null);
   const [BuildingOverlay, setOverlay] = useState(true);
+  // const [service, setService] = useState([{}]);
+
+  // useEffect(() => {
+  //   fetch("data/services.json")
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       setService(data);
+  //     })
+  // })
 
   const handlePOIClick = async (poiName) => {
     setLoading(true);
@@ -218,6 +251,13 @@ export default function Map() {
             eventHandlers={{ click: () => handlePOIClick(poi.name) }}
           />
         ))}
+        {ParkingPOIs.map(poi => (
+          <Marker
+            key={poi.name}
+            position={poi.center}
+            eventHandlers={{ click: () => handlePOIClick(poi.name) }}
+          />
+        ))}
         <TileLayer
           attribution='&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
           url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -268,6 +308,9 @@ export default function Map() {
               </tbody>
             </table>
           )}
+
+          {/* <h1>Services: {service.length}</h1> */}
+
           <button onClick={navigateToPOI}>Navigate</button>
         </div>
       )}
