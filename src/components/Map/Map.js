@@ -1,20 +1,22 @@
 'use client'
 
+import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import { MapContainer, TileLayer, Circle, Marker, Polygon, useMap, Polyline, ImageOverlay, SVGOverlay } from 'react-leaflet';
+import { MapContainer, TileLayer, Circle, Marker, Polyline, ImageOverlay, useMap } from 'react-leaflet';
 import style from './map.module.css';
 import { useEffect, useState } from 'react';
 import { getFirestore, doc, getDoc } from 'firebase/firestore';
 import { initializeApp, getApps } from 'firebase/app';
 import POIPopup from '../popup/POIPopup';
 
-// delete L.Icon.Default.prototype._getIconUrl;
 
-// L.Icon.Default.mergeOptions({
-//     iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png'),
-//     iconUrl: require('leaflet/dist/images/marker-icon.png'),
-//     shadowUrl: require('leaflet/dist/images/marker-shadow.png')
-// });
+delete L.Icon.Default.prototype._getIconUrl;
+
+L.Icon.Default.mergeOptions({
+    iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png'),
+    iconUrl: require('leaflet/dist/images/marker-icon.png'),
+    shadowUrl: require('leaflet/dist/images/marker-shadow.png')
+});
 
 // FIREBASE INITIALIZATION
 const firebaseConfig = {
@@ -67,11 +69,11 @@ const ParkingPOIs = [
   {name: 'Lot 3', center: [39.25442580927875, -76.70766078138759]},
   {name: 'Lot 4', center: [39.25482782773867,-76.70827964359925]},
   {name: 'Lot 5', center: [39.25772810832697,-76.70802358617365]},
-  {name: 'Lot 6', center: [39.25862386427897, -76.7110124390106]},
+  {name: 'Lot 6', center: [39.25862386427897,-76.7110124390106]},
   {name: 'Lot 7', center: [39.25712546791812,-76.71060763258053]},
   {name: 'Lot 8', center: [39.2561151240322,-76.71562438201605]},
-  {name: 'Lot 9', center: [39.25449255925222, -76.71517675194633]},
-  {name: 'Lot 10', center: [39.2577756078262, -76.7137077575889]},
+  {name: 'Lot 9', center: [39.25449255925222,-76.71517675194633]},
+  {name: 'Lot 10', center: [39.2577756078262,-76.7137077575889]},
   {name: 'Lot 11', center: [39.25621233852476,-76.70815496697239]},
   {name: 'Lot 12', center: [39.25641587432619,-76.70681118027422]},
   {name: 'Lot 20', center: [39.2608297948732,-76.7143695522274]},
@@ -88,10 +90,28 @@ const ParkingPOIs = [
   {name: 'Lot 31', center: [39.259851677140674,-76.71462441699336]},
 ]
 
+// Build POIS with calculated center for overlays
+const POIS = [
+  ...ParkingPOIs,
+  ...AcademicOverlays.map(a => ({
+    name: a.name,
+    center: [
+      (a.bounds[0][0] + a.bounds[1][0]) / 2,
+      (a.bounds[0][1] + a.bounds[1][1]) / 2
+    ]
+  })),
+  ...RecOverlays.map(r => ({
+    name: r.name,
+    center: [
+      (r.bounds[0][0] + r.bounds[1][0]) / 2,
+      (r.bounds[0][1] + r.bounds[1][1]) / 2
+    ]
+  }))
+];
+
 const fillBlueOptions = { fillOpacity: 1, fillColor: 'blue', color: '' };
 const daysOrder = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
 
-// Format time from 2400 to 12-hour format
 function formatTime(hourNum) {
   if (hourNum === 2400) return '12:00 AM';
   const str = hourNum.toString().padStart(4, '0');
@@ -102,7 +122,6 @@ function formatTime(hourNum) {
   return `${hours}:${minutes.toString().padStart(2,'0')} ${ampm}`;
 }
 
-// Center map on user location
 function LocationMarker({ setUserLocation }) {
   const [position, setPosition] = useState(null);
   const map = useMap();
@@ -133,7 +152,6 @@ function LocationMarker({ setUserLocation }) {
   return position ? <Circle center={position} pathOptions={fillBlueOptions} radius={10} /> : null;
 }
 
-// ROUTE POLYLINE
 function RoutePolyline({ path }) {
   const map = useMap();
   const validPath = path?.filter(p => p && typeof p.lat === 'number' && typeof p.long === 'number');
@@ -149,7 +167,6 @@ function RoutePolyline({ path }) {
     : null;
 }
 
-// FLY TO POI
 function FlyToPOI({ coords }) {
   const map = useMap();
   useEffect(() => {
@@ -158,18 +175,11 @@ function FlyToPOI({ coords }) {
   return null;
 }
 
-// MAIN MAP
 export default function Map({ selectedPOI: externalPOI }) {
-  // Combine name + data into one object
-  const [poiState, setPoiState] = useState({
-    name: null,
-    data: null,
-    coords: null
-  });
+  const [poiState, setPoiState] = useState({ name: null, data: null, coords: null });
   const [userLocation, setUserLocation] = useState(null);
   const [loading, setLoading] = useState(false);
   const [path, setPath] = useState(null);
-
 
   const handlePOIClick = async (poiName) => {
     setLoading(true);
@@ -187,7 +197,6 @@ export default function Map({ selectedPOI: externalPOI }) {
     }
   };
 
-  // Handle search selection
   useEffect(() => {
     if (externalPOI) handlePOIClick(externalPOI);
   }, [externalPOI]);
@@ -222,12 +231,9 @@ export default function Map({ selectedPOI: externalPOI }) {
         minZoom={16}
         maxZoom={18}
       >
-        {/* sets the user location in the map */}
         <LocationMarker setUserLocation={setUserLocation} />
         <FlyToPOI coords={poiState.coords} />
 
-
-        {/* controls the overlays for the academic buildings */}
         {AcademicOverlays.map(poi => (
           <ImageOverlay
             key={poi.name}
@@ -239,7 +245,6 @@ export default function Map({ selectedPOI: externalPOI }) {
             eventHandlers={{ click: () => handlePOIClick(poi.name) }}
           />
         ))}
-        {/* controls the overlays for the recreation buildings */}
         {RecOverlays.map(poi => (
           <ImageOverlay
             key={poi.name}
@@ -263,7 +268,6 @@ export default function Map({ selectedPOI: externalPOI }) {
           attribution='&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
           url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-
 
         {path && <RoutePolyline path={path} />}
       </MapContainer>
