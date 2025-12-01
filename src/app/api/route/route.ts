@@ -37,11 +37,9 @@ export async function POST(request: Request) {
 
     // 2) find nearest open Waypoint to target POI (using POI node location)
     const findPoiWpQ = `
-      MATCH (p:POI {id:$poiId})
-      MATCH (w:Waypoint)
-      WHERE w.open = true AND w.location IS NOT NULL AND p.location IS NOT NULL
-      RETURN w, point.distance(w.location, p.location) AS dist
-      ORDER BY dist ASC
+      MATCH (p:POI {id:$poiId})-[:LOCATED_AT]->(w:Waypoint)
+      WHERE w.open = true AND w.location IS NOT NULL
+      RETURN w, 0 AS dist
       LIMIT 1
     `;
     const poiWpRes = await runQuery(findPoiWpQ, { poiId });
