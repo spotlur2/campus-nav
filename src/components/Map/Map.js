@@ -113,7 +113,6 @@ const POIS = [
 ];
 
 const fillBlueOptions = { fillOpacity: 1, fillColor: 'blue', color: '' };
-const daysOrder = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
 
 function formatTime(hourNum) {
   if (hourNum === 2400) return '12:00 AM';
@@ -157,16 +156,16 @@ function LocationMarker({ setUserLocation }) {
 
 function RoutePolyline({ path }) {
   const map = useMap();
-  const validPath = path?.filter(p => p && typeof p.lat === 'number' && typeof p.long === 'number');
+  const validPath = path?.filter(p => p && typeof p.latitude === 'number' && typeof p.longitude === 'number');
 
   useEffect(() => {
     if (validPath && validPath.length > 0) {
-      map.fitBounds(validPath.map(p => [p.lat, p.long]));
+      map.fitBounds(validPath.map(p => [p.latitude, p.longitude]));
     }
   }, [validPath, map]);
 
   return validPath && validPath.length > 0
-    ? <Polyline positions={validPath.map(p => [p.lat, p.long])} color="red" weight={4} />
+    ? <Polyline positions={validPath.map(p => [p.latitude, p.longitude])} color="red" weight={4} />
     : null;
 }
 
@@ -179,26 +178,31 @@ function FlyToPOI({ coords }) {
 }
 
 export default function Map({ selectedPOI: externalPOI }) {
-  const [poiState, setPoiState] = useState({ name: null, data: null, coords: null });
+  const [poiState, setPoiState] = useState({ name: null, id: null, data: null, coords: null });
   const [userLocation, setUserLocation] = useState(null);
   const [loading, setLoading] = useState(false);
   const [path, setPath] = useState(null);
 
   const handlePOIClick = async (poiName) => {
-    setLoading(true);
-    try {
-      const docSnap = await getDoc(doc(db, 'searchBar', poiName));
-      const data = docSnap.exists() ? docSnap.data() : {};
-      const poiCoords = POIS.find(p => p.name === poiName)?.center || null;
-      setPoiState({ name: poiName, data, coords: poiCoords });
-    } catch (err) {
-      console.error('Error fetching POI data:', err);
-      const poiCoords = POIS.find(p => p.name === poiName)?.center || null;
-      setPoiState({ name: poiName, data: {}, coords: poiCoords });
-    } finally {
-      setLoading(false);
-    }
-  };
+  setLoading(true);
+  try {
+    const docSnap = await getDoc(doc(db, 'searchBar', poiName));
+    const data = docSnap.exists() ? docSnap.data() : {};
+    const poiCoords = POIS.find(p => p.name === poiName)?.center || null;
+
+    // use id from Firebase document if available
+    const poiId = data.id || poiName; // use name if no id exists
+
+    setPoiState({ name: poiName, id: poiId, data, coords: poiCoords });
+  } catch (err) {
+    console.error('Error fetching POI data:', err);
+    const poiCoords = POIS.find(p => p.name === poiName)?.center || null;
+    setPoiState({ name: poiName, id: null, data: {}, coords: poiCoords });
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   useEffect(() => {
     if (externalPOI) handlePOIClick(externalPOI);
@@ -206,23 +210,28 @@ export default function Map({ selectedPOI: externalPOI }) {
 
   const closePopup = () => setPoiState({ name: null, data: null, coords: null });
 
-  const navigateToPOI = async () => {
-    if (!userLocation || !poiState.name) return;
-    setLoading(true);
-    try {
-      const res = await fetch('/api/route', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ userLocation, endPOI: poiState.name }),
-      });
-      const data = await res.json();
-      if (data.path) setPath(data.path);
-    } catch (err) {
-      console.error('Error fetching path:', err);
-    } finally {
-      setLoading(false);
-    }
-  };
+const navigateToPOI = async () => {
+  if (!userLocation || !poiState.id) return; // make sure id exists
+  setLoading(true);
+  try {
+    const res = await fetch('/api/route', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ 
+        userLat: userLocation[0], 
+        userLon: userLocation[1], 
+        poiId: poiState.id 
+      }),
+    });
+    const data = await res.json();
+    if (data.route) setPath(data.route);
+  } catch (err) {
+    console.error('Error fetching path:', err);
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   return (
     <div style={{ position: 'relative' }}>
