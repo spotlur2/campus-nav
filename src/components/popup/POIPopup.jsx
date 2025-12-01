@@ -2,8 +2,10 @@
 
 import React from 'react';
 import style from './POIPopup.module.css';
+import services from '../poi_jsons/serv.json'
 
 const daysOrder = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+const ServiceData = services.ServiceData;
 
 function formatTime(hourNum) {
   if (hourNum === 2400) return '12:00 AM';
@@ -34,27 +36,49 @@ export default function POIPopup({ poiName, poiData, onClose, onNavigate, loadin
       {poiData.floor && <p>Floor: {poiData.floor}</p>}
       {poiData.room && <p>Room Number: {poiData.room}</p>}
 
-      {poiData.hours && typeof poiData.hours === 'object' && (
-        <div className={style.hoursContainer}>
+        <div className={style.servicesContainer}>
           <table>
+            <thead>
+              <tr>
+                <th>Service</th>
+                <th>Floor</th>
+                <th>Room#</th>
+              </tr>
+            </thead>
             <tbody>
-              {daysOrder.map(day => {
-                const times = poiData.hours?.[day];
-                if (!Array.isArray(times) || times.length < 2) return null;
-                const [open, close] = times;
-                const display = open === 0 && close === 0 ? 'Closed' : `${formatTime(open)} - ${formatTime(close)}`;
-                return (
-                  <tr key={day}>
-                    <td>{day}</td>
-                    <td>{display}</td>
+              {ServiceData.map((serv) =>
+                serv.POI === poiName ?(
+                  <tr key={serv.Service}>
+                    <td>{serv.Service}</td>
+                    <td>{serv.Floor}</td>
+                    <td>{serv.RoomNum}</td>
                   </tr>
-                );
-              })}
+                ) : null
+              )}
             </tbody>
           </table>
         </div>
-      )}
 
+        {poiData.hours && typeof poiData.hours === 'object' && (
+          <div className={style.hoursContainer}>
+            <table>
+              <tbody>
+                {daysOrder.map(day => {
+                  const times = poiData.hours?.[day];
+                  if (!Array.isArray(times) || times.length < 2) return null;
+                  const [open, close] = times;
+                  const display = open === 0 && close === 0 ? 'Closed' : `${formatTime(open)} - ${formatTime(close)}`;
+                  return (
+                    <tr key={day}>
+                      <td>{day}</td>
+                      <td>{display}</td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+        )}
       {onNavigate && (
         <button className={style.navigateButton} onClick={onNavigate}>
           Navigate

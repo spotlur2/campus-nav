@@ -1,0 +1,142 @@
+{
+    "ServiceData": [
+        {
+            "POI": "Performing Arts and Humanities Building",
+            "Service": "Theatre Labs",
+            "Floor": 0,
+            "RoomNum": ""
+        },
+        {
+            "POI": "Performing Arts and Humanities Building",
+            "Service": "Proscenium Theatre",
+            "Floor": 1,
+            "RoomNum": 103
+        },
+        {
+            "POI": "Performing Arts and Humanities Building",
+            "Service": "Black Box Theatre",
+            "Floor": 1,
+            "RoomNum": 127
+        },
+        {
+        "POI": "Performing Arts and Humanities Building",
+        "Service": "Theatre Rehearsal Studio",
+        "Floor": 1,
+        "RoomNum": 105
+        },
+        {
+        "POI": "Performing Arts and Humanities Building",
+        "Service": "Arts Management Department",
+        "Floor": 1,
+        "RoomNum": "101B"
+        },
+        {
+        "POI": "Performing Arts and Humanities Building",
+        "Service": "PAHB Operations Management",
+        "Floor": 1,
+        "RoomNum": "101C"
+        },
+        {
+        "POI": "Performing Arts and Humanities Building",
+        "Service": "Music Box",
+        "Floor": 1,
+        "RoomNum": 151
+        },
+        {
+        "POI": "Performing Arts and Humanities Building",
+        "Service": "PAHB Atrium",
+        "Floor": 1,
+        "RoomNum": ""
+        },
+        {
+        "POI": "Performing Arts and Humanities Building",
+        "Service": "Earl and Darielle Linehan Concert Hall",
+        "Floor": 2,
+        "RoomNum": 235
+        },
+        {
+        "POI": "Performing Arts and Humanities Building",
+        "Service": "Dresher Center for Humanities",
+        "Floor": 2,
+        "RoomNum": 215
+        },
+        {
+        "POI": "Performing Arts and Humanities Building",
+        "Service": "Linehan Artist Scholars Program",
+        "Floor": 2,
+        "RoomNum": 215
+        },
+        {
+        "POI": "Performing Arts and Humanities Building",
+        "Service": "Humanities Scholars Program",
+        "Floor": 2,
+        "RoomNum": 215
+        },
+        {
+        "POI": "Performing Arts and Humanities Building",
+        "Service": "Dance Technoogy Studio",
+        "Floor": 2,
+        "RoomNum": 231
+        },
+        {
+        "POI": "Performing Arts and Humanities Building",
+        "Service": "Music Department Office",
+        "Floor": 2,
+        "RoomNum": 238
+        },
+        {
+        "POI": "Performing Arts and Humanities Building",
+        "Service": "English Writing Labs 1",
+        "Floor": 3,
+        "RoomNum": 314
+        },
+        {
+        "POI": "Performing Arts and Humanities Building",
+        "Service": "English Writing Labs 2",
+        "Floor": 3,
+        "RoomNum": 317
+        },
+        {
+        "POI": "Performing Arts and Humanities Building",
+        "Service": "English Writing Labs 3",
+        "Floor": 3,
+        "RoomNum": 318
+        },
+        {
+        "POI": "Performing Arts and Humanities Building",
+        "Service": "Theatre Department Office",
+        "Floor": 3,
+        "RoomNum": 322
+        },
+        {
+        "POI": "Performing Arts and Humanities Building",
+        "Service": "Dance Cube",
+        "Floor": 3,
+        "RoomNum": 337
+        },
+        {
+        "POI": "Performing Arts and Humanities Building",
+        "Service": "Dance Department Office",
+        "Floor": 3,
+        "RoomNum": 343
+        },
+        {
+            "POI": "Performing Arts and Humanities Building",
+            "Service": "English Department Office",
+            "Floor": 4,
+            "RoomNum": 423
+        },
+        {
+            "POI": "Performing Arts and Humanities Building",
+            "Service": "Philosophy Department Office",
+            "Floor": 4,
+            "RoomNum": 452
+        },
+        {
+            "POI": "Performing Arts and Humanities Building",
+            "Service": "Ancient Studies Department Office",
+            "Floor": 4,
+            "RoomNum": 451
+        }
+]
+}
