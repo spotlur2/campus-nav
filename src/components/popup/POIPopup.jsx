@@ -5,6 +5,10 @@ import style from './POIPopup.module.css';
 import services from '../poi_jsons/serv.json'
 
 const daysOrder = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+const buildingNames = ['Information Technology and Engineering Building', 'Engineering Building', 'Fine Arts Building',
+                        'University Center', 'Administration Building', 'Interdisciplinary Life Sciences Building',
+                        'Performing Arts and Humanities Building', 'Albin O. Kuhn Library & Gallery',
+                        'Public Policy Building'];
 const ServiceData = services.ServiceData;
 
 function formatTime(hourNum) {
@@ -15,6 +19,15 @@ function formatTime(hourNum) {
   const ampm = hours >= 12 ? 'PM' : 'AM';
   hours = hours % 12 || 12;
   return `${hours}:${minutes.toString().padStart(2,'0')} ${ampm}`;
+}
+
+function servicesExist(poiName){
+  for (let pname in buildingNames){
+    if(pname == poiName){
+      return true;
+    }
+  }
+  return false;
 }
 
 export default function POIPopup({ poiName, poiData, onClose, onNavigate, loading }) {
@@ -36,6 +49,7 @@ export default function POIPopup({ poiName, poiData, onClose, onNavigate, loadin
       {poiData.floor && <p>Floor: {poiData.floor}</p>}
       {poiData.room && <p>Room Number: {poiData.room}</p>}
 
+      {servicesExist(poiName) &&
         <div className={style.servicesContainer}>
           <table>
             <thead>
@@ -58,7 +72,7 @@ export default function POIPopup({ poiName, poiData, onClose, onNavigate, loadin
             </tbody>
           </table>
         </div>
-
+      }
         {poiData.hours && typeof poiData.hours === 'object' && (
           <div className={style.hoursContainer}>
             <table>
