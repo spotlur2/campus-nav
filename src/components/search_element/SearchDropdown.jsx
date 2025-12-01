@@ -12,7 +12,10 @@ export default function SearchDropdown({ results, onSelect }) {
         <li
           key={result}
           className={styles.item}
-          onClick={() => onSelect(result)}
+          onClick={() => {
+            console.log("SearchDropdown: item clicked:", result);
+            onSelect(result);
+          }}
         >
           {result}
         </li>

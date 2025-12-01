@@ -34,10 +34,7 @@ const firebaseConfig = {
 if (!getApps().length) initializeApp(firebaseConfig);
 const db = getFirestore();
 
-// DATA
 
-//X: + goes up, - goes down
-//Y: more neg goes left, more pos goes right
 const AcademicOverlays = [
   { name: 'Information Technology and Engineering Building', url: 'https://upload.wikimedia.org/wikipedia/commons/2/22/ITE_%281%29.png', bounds:[[39.254205, -76.714465],[39.25401, -76.713828], [39.253440, -76.714078], [39.253635, -76.71473]], z: 1, opac: .3, interact: true},
   { name: 'Engineering Building', url: 'https://upload.wikimedia.org/wikipedia/commons/6/6f/EngineeringUMBC.png', bounds:[[39.254170535654, -76.7143764200593], [39.25486763981565, -76.71353167818892]], z: 1, opac: .3, interact: true},
@@ -56,8 +53,6 @@ const AcademicOverlays = [
   { name: 'Public Policy Building', url: 'https://upload.wikimedia.org/wikipedia/commons/6/65/Umbcpup.png', bounds:[[39.2549825212351, -76.7095150211758],[39.25541790150362, -76.70874270143506]], z: 1, opac: .3, interact: true},
 ];
 
-//X: + goes up, - goes down
-//Y: more neg goes left, more pos goes right
 const RecOverlays = [
   { name: 'The Center for Well-Being', url: 'https://upload.wikimedia.org/wikipedia/commons/c/c4/Umbchealth.png', bounds:[[39.255878452374325, -76.70916505097642],[39.25624054142026, -76.70866669869644]], z: 1, opac: .3, interact: true},
   { name: 'Retriever Activities Center', url: 'https://upload.wikimedia.org/wikipedia/commons/c/c3/Umbcrac.png', bounds:[[39.252307057669926, -76.7131793184523],[39.253406400018686, -76.71192710981711]], z: 1, opac: .3, interact: true},
@@ -184,53 +179,77 @@ export default function Map({ selectedPOI: externalPOI }) {
   const [path, setPath] = useState(null);
 
   const handlePOIClick = async (poiName) => {
-  setLoading(true);
-  try {
-    const docSnap = await getDoc(doc(db, 'searchBar', poiName));
-    const data = docSnap.exists() ? docSnap.data() : {};
-    const poiCoords = POIS.find(p => p.name === poiName)?.center || null;
+    setLoading(true);
+    try {
+      const docSnap = await getDoc(doc(db, 'searchBar', poiName));
+      const data = docSnap.exists() ? docSnap.data() : {};
+      const poiCoords = POIS.find(p => p.name === poiName)?.center || null;
 
-    // use id from Firebase document if available
-    const poiId = data.id || poiName; // use name if no id exists
+      // use id from Firebase document if available
+      const poiId = data.id || poiName;
 
-    setPoiState({ name: poiName, id: poiId, data, coords: poiCoords });
-  } catch (err) {
-    console.error('Error fetching POI data:', err);
-    const poiCoords = POIS.find(p => p.name === poiName)?.center || null;
-    setPoiState({ name: poiName, id: null, data: {}, coords: poiCoords });
-  } finally {
-    setLoading(false);
-  }
-};
+      setPoiState({ name: poiName, id: poiId, data, coords: poiCoords });
+    } catch (err) {
+      console.error('Error fetching POI data:', err);
+      const poiCoords = POIS.find(p => p.name === poiName)?.center || null;
+      setPoiState({ name: poiName, id: null, data: {}, coords: poiCoords });
+    } finally {
+      setLoading(false);
+    }
+  };
 
 
   useEffect(() => {
-    if (externalPOI) handlePOIClick(externalPOI);
-  }, [externalPOI]);
+
+    if (externalPOI && externalPOI !== poiState.name) {
+      console.log('Map.js: externalPOI prop received -> handling POI click:', externalPOI);
+      handlePOIClick(externalPOI);
+    }
+  }, [externalPOI, poiState.name]);
+
+
+  useEffect(() => {
+    const handler = (e) => {
+      try {
+        const ce = e;
+        const name = ce?.detail;
+        if (name && typeof name === 'string' && name !== poiState.name) {
+          console.log('Map.js: received global poi-selected event -> handling POI click:', name);
+          handlePOIClick(name);
+        }
+      } catch (err) {
+        console.warn('Map.js: error handling global poi-selected', err);
+      }
+    };
+    window.addEventListener('poi-selected', handler);
+    return () => window.removeEventListener('poi-selected', handler);
+  }, [poiState.name]);
+  // -------------------------------------------------------------------------
+
 
   const closePopup = () => setPoiState({ name: null, data: null, coords: null });
 
-const navigateToPOI = async () => {
-  if (!userLocation || !poiState.id) return; // make sure id exists
-  setLoading(true);
-  try {
-    const res = await fetch('/api/route', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ 
-        userLat: userLocation[0], 
-        userLon: userLocation[1], 
-        poiId: poiState.id 
-      }),
-    });
-    const data = await res.json();
-    if (data.route) setPath(data.route);
-  } catch (err) {
-    console.error('Error fetching path:', err);
-  } finally {
-    setLoading(false);
-  }
-};
+  const navigateToPOI = async () => {
+    if (!userLocation || !poiState.id) return; // make sure id exists
+    setLoading(true);
+    try {
+      const res = await fetch('/api/route', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          userLat: userLocation[0],
+          userLon: userLocation[1],
+          poiId: poiState.id
+        }),
+      });
+      const data = await res.json();
+      if (data.route) setPath(data.route);
+    } catch (err) {
+      console.error('Error fetching path:', err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
 
   return (

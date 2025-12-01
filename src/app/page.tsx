@@ -4,7 +4,7 @@ import dynamic from 'next/dynamic';
 import SearchBar from '../components/search_element/SearchBar';
 import FilterButton from '../components/filter_element/FilterButton';
 import ProfileSelector from '../components/profile_elements/ProfileButtons';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const Map = dynamic(() => import('../components/Map'), { ssr: false });
 
@@ -15,6 +15,24 @@ export default function Home() {
     console.log("Selected from search:", poiName);
     setSelectedPOI(poiName);     // Send POI name to Map
   };
+
+  useEffect(() => {
+    const handler = (e: Event) => {
+      try {
+        // CustomEvent has detail, but TS/Event typing is generic, so guard
+        const ce = e as CustomEvent;
+        const name = ce?.detail;
+        if (name && typeof name === 'string') {
+          console.log('page.tsx: received poi-selected event for', name);
+          setSelectedPOI(name);
+        }
+      } catch (err) {
+        console.warn('page.tsx: error handling poi-selected event', err);
+      }
+    };
+    window.addEventListener('poi-selected', handler);
+    return () => window.removeEventListener('poi-selected', handler);
+  }, []);
 
   return (
     <main className="relative h-screen w-screen flex flex-col">

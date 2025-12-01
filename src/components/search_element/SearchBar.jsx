@@ -21,14 +21,19 @@ export default function SearchBar({ onSelect }) {
   const [allNames, setAllNames] = useState([]);
   const [results, setResults] = useState([]);
 
-  // Load all POI names one time
   useEffect(() => {
+    let mounted = true;
     async function loadNames() {
-      const snap = await getDocs(collection(db, "searchBar"));
-      const names = snap.docs.map((d) => d.id);
-      setAllNames(names);
+      try {
+        const snap = await getDocs(collection(db, "searchBar"));
+        const names = snap.docs.map((d) => d.id);
+        if (mounted) setAllNames(names);
+      } catch (e) {
+        console.error('SearchBar: error loading names', e);
+      }
     }
     loadNames();
+    return () => { mounted = false; };
   }, []);
 
   // Live filtering
@@ -44,6 +49,25 @@ export default function SearchBar({ onSelect }) {
 
     setResults(filtered.slice(0, 8)); // max 8 results
   }, [query, allNames]);
+
+  const handleSelect = (name) => {
+    console.log('SearchBar: selected', name);
+    try {
+      if (typeof onSelect === 'function') onSelect(name);
+    } catch (e) {
+      console.warn('SearchBar: onSelect threw', e);
+    }
+
+    try {
+      window.dispatchEvent(new CustomEvent('poi-selected', { detail: name }));
+      console.log('SearchBar: dispatched poi-selected event for', name);
+    } catch (e) {
+      console.warn('SearchBar: failed to dispatch poi-selected event', e);
+    }
+
+    setQuery("");
+    setResults([]);
+  };
 
   return (
     <div style={{ position: "relative", width: "100%" }}>
@@ -69,11 +93,7 @@ export default function SearchBar({ onSelect }) {
 
       <SearchDropdown
         results={results}
-        onSelect={(name) => {
-          onSelect(name);  // send to Map.js
-          setQuery("");   // clear search bar
-          setResults([]); // hide dropdown
-        }}
+        onSelect={handleSelect}
       />
     </div>
   );
