@@ -137,6 +137,1045 @@
             "Service": "Ancient Studies Department Office",
             "Floor": 4,
             "RoomNum": 451
+        },
+        {
+        "POI": "The Commons",
+        "Service": "The Women's Center",
+        "Floor": 0,
+        "RoomNum": ""
+        },
+        {
+        "POI": "The Commons",
+        "Service": "The Yum Shoppe",
+        "Floor": 0,
+        "RoomNum": ""
+        },
+        {
+        "POI": "The Commons",
+        "Service": "Gender Inclusive Restrooms",
+        "Floor": 0,
+        "RoomNum": ""
+        },
+        {
+        "POI": "The Commons",
+        "Service": "Dunkin'",
+        "Floor": 0,
+        "RoomNum": ""
+        },
+        {
+        "POI": "The Commons",
+        "Service": "The Bookstore",
+        "Floor": 1,
+        "RoomNum": ""
+        },
+        {
+        "POI": "The Commons",
+        "Service": "Office of Health Promotion and Essential Needs and Connections",
+        "Floor": 1,
+        "RoomNum": ""
+        },
+        {
+        "POI": "The Commons",
+        "Service": "Retriever Essentials",
+        "Floor": 1,
+        "RoomNum": ""
+        },
+        {
+        "POI": "The Commons",
+        "Service": "The Campus Information Center",
+        "Floor": 1,
+        "RoomNum": ""
+        },
+        {
+        "POI": "The Commons",
+        "Service": "Fraternities & Sororities",
+        "Floor": 2,
+        "RoomNum": ""
+        },
+        {
+        "POI": "The Commons",
+        "Service": "The Mosaic",
+        "Floor": 2,
+        "RoomNum": ""
+        },
+        {
+        "POI": "The Commons",
+        "Service": "Student Events Board (SEB)",
+        "Floor": 2,
+        "RoomNum": ""
+        },
+        {
+        "POI": "The Commons",
+        "Service": "Student Government Association (SGA)",
+        "Floor": 2,
+        "RoomNum": ""
+        },
+        {
+        "POI": "The Commons",
+        "Service": "Center for Democracy and Civic Life",
+        "Floor": 2,
+        "RoomNum": ""
+        },
+        {
+        "POI": "The Commons",
+        "Service": "The Gameroom",
+        "Floor": 2,
+        "RoomNum": ""
+        },
+        {
+        "POI": "The Commons",
+        "Service": "Sports Zone",
+        "Floor": 2,
+        "RoomNum": ""
+        },
+        {
+        "POI": "The Commons",
+        "Service": "Student Engagement",
+        "Floor": 3,
+        "RoomNum": ""
+        },
+        {
+        "POI": "The Commons",
+        "Service": "Student Success",
+        "Floor": 3,
+        "RoomNum": ""
+        },
+        {
+        "POI": "The Commons",
+        "Service": "Graduate Student Life",
+        "Floor": 3,
+        "RoomNum": ""
+        },
+        {
+        "POI": "The Commons",
+        "Service": "Graduate Student Association",
+        "Floor": 3,
+        "RoomNum": ""
+        },
+        {
+        "POI": "The Commons",
+        "Service": "commonvision",
+        "Floor": 3,
+        "RoomNum": ""
+        },
+        {
+        "POI": "The Commons",
+        "Service": "Event & Conference Services",
+        "Floor": 3,
+        "RoomNum": ""
+        },
+        {
+        "POI": "The Commons",
+        "Service": "Office of the Vice President for Student Affairs",
+        "Floor": 3,
+        "RoomNum": ""
+        },
+        {
+        "POI": "The Commons",
+        "Service": "Student Affairs Business Services Center",
+        "Floor": 3,
+        "RoomNum": ""
+        },
+        {
+        "POI": "University Center",
+        "Service": "Chick-fil-A",
+        "Floor": 1,
+        "RoomNum": ""
+        },
+        {
+        "POI": "University Center",
+        "Service": "Starbucks",
+        "Floor": 1,
+        "RoomNum": ""
+        },
+        {
+        "POI": "University Center",
+        "Service": "CNMS Active Science Teaching & Learning Environment (CASTLE)",
+        "Floor": 1,
+        "RoomNum": "115D"
+        },
+        {
+        "POI": "University Center",
+        "Service": "College of Natural & Mathematical Sciences (CNMS)",
+        "Floor": 1,
+        "RoomNum": 116
+        },
+        {
+        "POI": "University Center",
+        "Service": "Campus Card and Mail Services",
+        "Floor": 1,
+        "RoomNum": 112
+        },
+        {
+        "POI": "University Center",
+        "Service": "WMBC Campus Radio",
+        "Floor": 1,
+        "RoomNum": 101
+        },
+        {
+        "POI": "University Center",
+        "Service": "Center for Global Engagement",
+        "Floor": 2,
+        "RoomNum": "207A"
+        },
+        {
+        "POI": "University Center",
+        "Service": "Chemistry & Biochemistry CNMS Advising",
+        "Floor": 2,
+        "RoomNum": 205
+        },
+        {
+        "POI": "University Center",
+        "Service": "Discover Center",
+        "Floor": 2,
+        "RoomNum": 201
+        },
+        {
+        "POI": "University Center",
+        "Service": "English Language Institute",
+        "Floor": 2,
+        "RoomNum": "207A"
+        },
+        {
+        "POI": "University Center",
+        "Service": "The Pride Center",
+        "Floor": 2,
+        "RoomNum": "201D"
+        },
+        {
+        "POI": "University Center",
+        "Service": "Retriever Weekly-Campus Newspaper",
+        "Floor": 2,
+        "RoomNum": 214
+        },
+        {
+        "POI": "University Center",
+        "Service": "University Center Ballroom",
+        "Floor": 3,
+        "RoomNum": 301
+        },
+        {
+        "POI": "University Center",
+        "Service": "University Center Ballroom Lounge",
+        "Floor": 3,
+        "RoomNum": 302
+        },
+        {
+        "POI": "Public Policy Building",
+        "Service": "Shriver Center Reception Area",
+        "Floor": 1,
+        "RoomNum": 144
+        },
+        {
+        "POI": "Public Policy Building",
+        "Service": "Shriver Center Director",
+        "Floor": 1,
+        "RoomNum": ""
+        },
+        {
+        "POI": "Public Policy Building",
+        "Service": "Services-Learning and K-16 Initiative",
+        "Floor": 1,
+        "RoomNum": ""
+        },
+        {
+        "POI": "Public Policy Building",
+        "Service": "Shriver Peacework Program",
+        "Floor": 1,
+        "RoomNum": ""
+        },
+        {
+        "POI": "Public Policy Building",
+        "Service": "The Choice Program",
+        "Floor": 1,
+        "RoomNum": ""
+        },
+        {
+        "POI": "Public Policy Building",
+        "Service": "Economics Department",
+        "Floor": 3,
+        "RoomNum": ""
+        },
+        {
+        "POI": "Public Policy Building",
+        "Service": "Political Science Department",
+        "Floor": 3,
+        "RoomNum": ""
+        },
+        {
+        "POI": "Public Policy Building",
+        "Service": "Center for Social Science Scholarship",
+        "Floor": 4,
+        "RoomNum": ""
+        },
+        {
+        "POI": "Public Policy Building",
+        "Service": "Creative Achievement and Research Administration Team (CARAT)",
+        "Floor": 4,
+        "RoomNum": ""
+        },
+        {
+        "POI": "Public Policy Building",
+        "Service": "School of Public Policy",
+        "Floor": "",
+        "RoomNum": ""
+        },
+        {
+        "POI": "Interdisciplinary Life Sciences Building",
+        "Service": "The Keith R. Porter Imaging Facility",
+        "Floor": "",
+        "RoomNum": ""
+        },
+        {
+        "POI": "Interdisciplinary Life Sciences Building",
+        "Service": "The Molecular Characterization and Analysis Complex (MCAC)",
+        "Floor": "",
+        "RoomNum": ""
+        },
+        {
+        "POI": "Interdisciplinary Life Sciences Building",
+        "Service": "Research Graphics",
+        "Floor": "",
+        "RoomNum": ""
+        },
+        {
+        "POI": "Interdisciplinary Life Sciences Building",
+        "Service": "Environmental Systems Laboratories",
+        "Floor": 1,
+        "RoomNum": ""
+        },
+        {
+        "POI": "Interdisciplinary Life Sciences Building",
+        "Service": "GMP Laboratory Training",
+        "Floor": 2,
+        "RoomNum": ""
+        },
+        {
+        "POI": "The Center for Well-Being",
+        "Service": "Spiritual Advising Office",
+        "Floor": 1,
+        "RoomNum": 109
+        },
+        {
+        "POI": "The Center for Well-Being",
+        "Service": "Office of Health Promotion",
+        "Floor": 1,
+        "RoomNum": 102
+        },
+        {
+        "POI": "The Center for Well-Being",
+        "Service": "Student Conduct and Community Standards",
+        "Floor": 1,
+        "RoomNum": 119
+        },
+        {
+        "POI": "The Center for Well-Being",
+        "Service": "Mind Spa",
+        "Floor": 1,
+        "RoomNum": 116
+        },
+        {
+        "POI": "The Center for Well-Being",
+        "Service": "Retriever Integrated Health ",
+        "Floor": 2,
+        "RoomNum": 201
+        },
+        {
+        "POI": "Fine Arts Building",
+        "Service": "Sherman Center for Early Learning in Urban Communities",
+        "Floor": 0,
+        "RoomNum": "17"
+        },
+        {
+        "POI": "Fine Arts Building",
+        "Service": "Maryland Early Childhood Leadership Program (MECLP)",
+        "Floor": 0,
+        "RoomNum": "017A"
+        },
+        {
+        "POI": "Fine Arts Building",
+        "Service": "Visual Arts Department",
+        "Floor": 2,
+        "RoomNum": ""
+        },
+        {
+        "POI": "Fine Arts Building",
+        "Service": "Dance Department",
+        "Floor": 3,
+        "RoomNum": ""
+        },
+        {
+        "POI": "Fine Arts Building",
+        "Service": "Theater Department",
+        "Floor": 3,
+        "RoomNum": ""
+        },
+        {
+        "POI": "Fine Arts Building",
+        "Service": "Visual Arts Department",
+        "Floor": 3,
+        "RoomNum": ""
+        },
+        {
+        "POI": "Fine Arts Building",
+        "Service": "Dean of College of Arts, Humanities and Social Sciences",
+        "Floor": 4,
+        "RoomNum": ""
+        },
+        {
+        "POI": "Fine Arts Building",
+        "Service": "Gender & Women's Studies Department",
+        "Floor": 4,
+        "RoomNum": ""
+        },
+        {
+        "POI": "Fine Arts Building",
+        "Service": "Media and Communication Studies Department",
+        "Floor": 4,
+        "RoomNum": ""
+        },
+        {
+        "POI": "Fine Arts Building",
+        "Service": "Modern Languages, Linguistics, and Intercultural Communications Department",
+        "Floor": 4,
+        "RoomNum": ""
+        },
+        {
+        "POI": "Fine Arts Building",
+        "Service": "Africana Studies Department",
+        "Floor": 5,
+        "RoomNum": ""
+        },
+        {
+        "POI": "Fine Arts Building",
+        "Service": "American Studies Department",
+        "Floor": 5,
+        "RoomNum": ""
+        },
+        {
+        "POI": "Fine Arts Building",
+        "Service": "Asian Studies Program",
+        "Floor": 5,
+        "RoomNum": ""
+        },
+        {
+        "POI": "Fine Arts Building",
+        "Service": "Religious Studies Program",
+        "Floor": 5,
+        "RoomNum": ""
+        },
+        {
+        "POI": "Fine Arts Building",
+        "Service": "Global Studies Program",
+        "Floor": 5,
+        "RoomNum": ""
+        },
+        {
+        "POI": "Fine Arts Building",
+        "Service": "History Department",
+        "Floor": 5,
+        "RoomNum": ""
+        },
+        {
+        "POI": "Fine Arts Building",
+        "Service": "Judaic Studies Program",
+        "Floor": 5,
+        "RoomNum": ""
+        },
+        {
+        "POI": "Engineering Building",
+        "Service": "American Institute of Chemical Engineers (AIChE)",
+        "Floor": 1,
+        "RoomNum": 106
+        },
+        {
+        "POI": "Engineering Building",
+        "Service": "Department of Chemical, Biochemical and Environmental Engineering (CBEE)",
+        "Floor": 1,
+        "RoomNum": ""
+        },
+        {
+        "POI": "Engineering Building",
+        "Service": "Mechanical Engineering Labs",
+        "Floor": 1,
+        "RoomNum": ""
+        },
+        {
+        "POI": "Engineering Building",
+        "Service": "Open Computer Lab: Mac",
+        "Floor": 1,
+        "RoomNum": "122A"
+        },
+        {
+        "POI": "Engineering Building",
+        "Service": "Open Computer Lab: PCs",
+        "Floor": 1,
+        "RoomNum": 122
+        },
+        {
+        "POI": "Engineering Building",
+        "Service": "Open Computer Lab: SGIs",
+        "Floor": 1,
+        "RoomNum": "104A"
+        },
+        {
+        "POI": "Engineering Building",
+        "Service": "Mechanical Engineering Department",
+        "Floor": 2,
+        "RoomNum": ""
+        },
+        {
+        "POI": "Engineering Building",
+        "Service": "CBEE Office of Sponsered Programs",
+        "Floor": 3,
+        "RoomNum": ""
+        },
+        {
+        "POI": "Information Technology and Engineering Building",
+        "Service": "Image Research Center (IRC)",
+        "Floor": 1,
+        "RoomNum": "101A"
+        },
+        {
+        "POI": "Information Technology and Engineering Building",
+        "Service": "College of Engineering and Information Technology (COEIT) Offices",
+        "Floor": 2,
+        "RoomNum": ""
+        },
+        {
+        "POI": "Information Technology and Engineering Building",
+        "Service": "COEIT Advising",
+        "Floor": 2,
+        "RoomNum": ""
+        },
+        {
+        "POI": "Information Technology and Engineering Building",
+        "Service": "COEIT Engineering and Computing Education (ECEP)",
+        "Floor": 2,
+        "RoomNum": ""
+        },
+        {
+        "POI": "Information Technology and Engineering Building",
+        "Service": "Department of Computer Science and Eletrical Engineering",
+        "Floor": 2,
+        "RoomNum": ""
+        },
+        {
+        "POI": "Information Technology and Engineering Building",
+        "Service": "Office of the Vice President for Research and Creative Achievement",
+        "Floor": 2,
+        "RoomNum": ""
+        },
+        {
+        "POI": "Information Technology and Engineering Building",
+        "Service": "Department of Computer Science and Eletrical Engineering 3",
+        "Floor": 3,
+        "RoomNum": ""
+        },
+        {
+        "POI": "Information Technology and Engineering Building",
+        "Service": "Information Systems Department",
+        "Floor": 4,
+        "RoomNum": ""
+        },
+        {
+        "POI": "Information Technology and Engineering Building",
+        "Service": "Center for Women in Technology",
+        "Floor": "",
+        "RoomNum": ""
+        },
+        {
+        "POI": "Retriever Actvity Center",
+        "Service": "Arena Court",
+        "Floor": 0,
+        "RoomNum": "001"
+        },
+        {
+        "POI": "Retriever Actvity Center",
+        "Service": "Courts",
+        "Floor": 0,
+        "RoomNum": "070"
+        },
+        {
+        "POI": "Retriever Actvity Center",
+        "Service": "Pool Locker Room",
+        "Floor": 0,
+        "RoomNum": "023"
+        },
+        {
+        "POI": "Retriever Actvity Center",
+        "Service": "RAC Locker Room ",
+        "Floor": 0,
+        "RoomNum": "096"
+        },
+        {
+        "POI": "Retriever Actvity Center",
+        "Service": "Pool",
+        "Floor": 0,
+        "RoomNum": "030"
+        },
+        {
+        "POI": "Retriever Actvity Center",
+        "Service": "Aquatics Director",
+        "Floor": 0,
+        "RoomNum": "044"
+        },
+        {
+        "POI": "Retriever Actvity Center",
+        "Service": "Multipurpose Room",
+        "Floor": 0,
+        "RoomNum": "050"
+        },
+        {
+        "POI": "Retriever Actvity Center",
+        "Service": "Sports Medicine",
+        "Floor": 0,
+        "RoomNum": "056"
+        },
+        {
+        "POI": "Retriever Actvity Center",
+        "Service": "Weight Room",
+        "Floor": 0,
+        "RoomNum": "060"
+        },
+        {
+        "POI": "Retriever Actvity Center",
+        "Service": "Equiptment Checkout",
+        "Floor": 0,
+        "RoomNum": "070"
+        },
+        {
+        "POI": "Retriever Actvity Center",
+        "Service": "Track",
+        "Floor": 1,
+        "RoomNum": "101"
+        },
+        {
+        "POI": "Retriever Actvity Center",
+        "Service": "Multipurpose Room",
+        "Floor": 1,
+        "RoomNum": "106"
+        },
+        {
+        "POI": "Retriever Actvity Center",
+        "Service": "Personal Training",
+        "Floor": 1,
+        "RoomNum": "120"
+        },
+        {
+        "POI": "Retriever Actvity Center",
+        "Service": "Aquatics Balcony",
+        "Floor": 1,
+        "RoomNum": "112"
+        },
+        {
+        "POI": "Retriever Actvity Center",
+        "Service": "Functional Fitness",
+        "Floor": 1,
+        "RoomNum": "122"
+        },
+        {
+        "POI": "Retriever Actvity Center",
+        "Service": "Cycle Studio",
+        "Floor": 1,
+        "RoomNum": "124"
+        },
+        {
+        "POI": "Retriever Actvity Center",
+        "Service": "Fitness Studio",
+        "Floor": 1,
+        "RoomNum": "144"
+        },
+        {
+        "POI": "Retriever Actvity Center",
+        "Service": "Cardio Zone and Balcony",
+        "Floor": 1,
+        "RoomNum": "145"
+        },
+        {
+        "POI": "Retriever Actvity Center",
+        "Service": "Multipurpose Room",
+        "Floor": 2,
+        "RoomNum": ""
+        },
+        {
+        "POI": "Retriever Actvity Center",
+        "Service": "Swimming and Diving Office",
+        "Floor": 2,
+        "RoomNum": ""
+        },
+        {
+        "POI": "Retriever Actvity Center",
+        "Service": "Recreation and PE Office",
+        "Floor": 2,
+        "RoomNum": ""
+        },
+        {
+        "POI": "Retriever Actvity Center",
+        "Service": "Summer Day Camp Office",
+        "Floor": 2,
+        "RoomNum": ""
+        },
+        {
+        "POI": "Retriever Actvity Center",
+        "Service": "University of Maryland Orthopaedics",
+        "Floor": 2,
+        "RoomNum": "201"
+        },
+        {
+        "POI": "Administration Building",
+        "Service": "Administration Coffee Shoppe",
+        "Floor": 1,
+        "RoomNum": ""
+        },
+        {
+        "POI": "Administration Building",
+        "Service": "Admissions (Graduate)",
+        "Floor": 2,
+        "RoomNum": ""
+        },
+        {
+        "POI": "Administration Building",
+        "Service": "Budget and Resource Analysis",
+        "Floor": 4,
+        "RoomNum": ""
+        },
+        {
+        "POI": "Administration Building",
+        "Service": "Business Services",
+        "Floor": 3,
+        "RoomNum": ""
+        },
+        {
+        "POI": "Administration Building",
+        "Service": "Cashier and Student Business Services",
+        "Floor": 3,
+        "RoomNum": ""
+        },
+        {
+        "POI": "Administration Building",
+        "Service": "Center for Social Justice Dialogue",
+        "Floor": 9,
+        "RoomNum": ""
+        },
+        {
+        "POI": "Administration Building",
+        "Service": "Contract and Grant Accounting",
+        "Floor": 4,
+        "RoomNum": ""
+        },
+        {
+        "POI": "Administration Building",
+        "Service": "Dean of Undergraduate Academic Affairs",
+        "Floor": 9,
+        "RoomNum": ""
+        },
+        {
+        "POI": "Administration Building",
+        "Service": "Division of Institutional Equity",
+        "Floor": 9,
+        "RoomNum": ""
+        },
+        {
+        "POI": "Administration Building",
+        "Service": "Financial Accounting and Reporting",
+        "Floor": 3,
+        "RoomNum": ""
+        },
+        {
+        "POI": "Administration Building",
+        "Service": "Financial Services",
+        "Floor": 4,
+        "RoomNum": ""
+        },
+        {
+        "POI": "Administration Building",
+        "Service": "General Counsel",
+        "Floor": 10,
+        "RoomNum": ""
+        },
+        {
+        "POI": "Administration Building",
+        "Service": "Government Relations and Community Affairs",
+        "Floor": 9,
+        "RoomNum": ""
+        },
+        {
+        "POI": "Administration Building",
+        "Service": "Graduate School",
+        "Floor": 2,
+        "RoomNum": ""
+        },
+        {
+        "POI": "Administration Building",
+        "Service": "Human Resources",
+        "Floor": 5,
+        "RoomNum": ""
+        },
+        {
+        "POI": "Administration Building",
+        "Service": "Information Technology Business Applications",
+        "Floor": 6,
+        "RoomNum": ""
+        },
+        {
+        "POI": "Administration Building",
+        "Service": "Institutional Advancement",
+        "Floor": 7,
+        "RoomNum": ""
+        },
+        {
+        "POI": "Administration Building",
+        "Service": "Institutional Research, Analysis, and Decision Support",
+        "Floor": 4,
+        "RoomNum": ""
+        },
+        {
+        "POI": "Administration Building",
+        "Service": "International Education Services",
+        "Floor": 2,
+        "RoomNum": ""
+        },
+        {
+        "POI": "Administration Building",
+        "Service": "Inventory and Plant Accounting",
+        "Floor": 3,
+        "RoomNum": ""
+        },
+        {
+        "POI": "Administration Building",
+        "Service": "Management Advisory Services",
+        "Floor": 9,
+        "RoomNum": ""
+        },
+        {
+        "POI": "Administration Building",
+        "Service": "Office of Equity and Civil Rights",
+        "Floor": 9,
+        "RoomNum": ""
+        },
+        {
+        "POI": "Administration Building",
+        "Service": "Student Administration",
+        "Floor": 6,
+        "RoomNum": ""
+        },
+        {
+        "POI": "Albin O. Kuhn Library & Gallery",
+        "Service": "Acquisitions",
+        "Floor": 1,
+        "RoomNum": 123
+        },
+        {
+        "POI": "Albin O. Kuhn Library & Gallery",
+        "Service": "Archives and Manuscripts",
+        "Floor": 1,
+        "RoomNum": 104
+        },
+        {
+        "POI": "Albin O. Kuhn Library & Gallery",
+        "Service": "Check Out Desk",
+        "Floor": 1,
+        "RoomNum": ""
+        },
+        {
+        "POI": "Albin O. Kuhn Library & Gallery",
+        "Service": "Collection Management",
+        "Floor": 1,
+        "RoomNum": 158
+        },
+        {
+        "POI": "Albin O. Kuhn Library & Gallery",
+        "Service": "Gifts",
+        "Floor": 1,
+        "RoomNum": 158
+        },
+        {
+        "POI": "Albin O. Kuhn Library & Gallery",
+        "Service": "Interlibrary Loan",
+        "Floor": 1,
+        "RoomNum": 158
+        },
+        {
+        "POI": "Albin O. Kuhn Library & Gallery",
+        "Service": "Leisure Reading Room",
+        "Floor": 1,
+        "RoomNum": ""
+        },
+        {
+        "POI": "Albin O. Kuhn Library & Gallery",
+        "Service": "Math and Science Tutoring Center",
+        "Floor": 1,
+        "RoomNum": ""
+        },
+        {
+        "POI": "Albin O. Kuhn Library & Gallery",
+        "Service": "Print & Copy Center",
+        "Floor": 1,
+        "RoomNum": ""
+        },
+        {
+        "POI": "Albin O. Kuhn Library & Gallery",
+        "Service": "Reference and Information Desk",
+        "Floor": 1,
+        "RoomNum": ""
+        },
+        {
+        "POI": "Albin O. Kuhn Library & Gallery",
+        "Service": "Reference Collection",
+        "Floor": 1,
+        "RoomNum": ""
+        },
+        {
+        "POI": "Albin O. Kuhn Library & Gallery",
+        "Service": "Reference Office",
+        "Floor": 1,
+        "RoomNum": 155
+        },
+        {
+        "POI": "Albin O. Kuhn Library & Gallery",
+        "Service": "Reserves",
+        "Floor": 1,
+        "RoomNum": ""
+        },
+        {
+        "POI": "Albin O. Kuhn Library & Gallery",
+        "Service": "Retriever Learning Center (RLC)",
+        "Floor": 1,
+        "RoomNum": ""
+        },
+        {
+        "POI": "Albin O. Kuhn Library & Gallery",
+        "Service": "Security Desk",
+        "Floor": 1,
+        "RoomNum": ""
+        },
+        {
+        "POI": "Albin O. Kuhn Library & Gallery",
+        "Service": "Special Collections",
+        "Floor": 1,
+        "RoomNum": 104
+        },
+        {
+        "POI": "Albin O. Kuhn Library & Gallery",
+        "Service": "Technical Services",
+        "Floor": 1,
+        "RoomNum": 123
+        },
+        {
+        "POI": "Albin O. Kuhn Library & Gallery",
+        "Service": "University Archives",
+        "Floor": 1,
+        "RoomNum": 104
+        },
+        {
+        "POI": "Albin O. Kuhn Library & Gallery",
+        "Service": "Writing Center",
+        "Floor": 1,
+        "RoomNum": ""
+        },
+        {
+        "POI": "Albin O. Kuhn Library & Gallery",
+        "Service": "Current Periodicals",
+        "Floor": 2,
+        "RoomNum": ""
+        },
+        {
+        "POI": "Albin O. Kuhn Library & Gallery",
+        "Service": "Digital Media Lab",
+        "Floor": 2,
+        "RoomNum": "216H"
+        },
+        {
+        "POI": "Albin O. Kuhn Library & Gallery",
+        "Service": "Honors College",
+        "Floor": 2,
+        "RoomNum": "216L"
+        },
+        {
+        "POI": "Albin O. Kuhn Library & Gallery",
+        "Service": "Library IT Services",
+        "Floor": 2,
+        "RoomNum": 256
+        },
+        {
+        "POI": "Albin O. Kuhn Library & Gallery",
+        "Service": "Library Media Collections",
+        "Floor": 2,
+        "RoomNum": ""
+        },
+        {
+        "POI": "Albin O. Kuhn Library & Gallery",
+        "Service": "Microforms",
+        "Floor": 2,
+        "RoomNum": ""
+        },
+        {
+        "POI": "Albin O. Kuhn Library & Gallery",
+        "Service": "Presentation Practice Room",
+        "Floor": 2,
+        "RoomNum": 257
+        },
+        {
+        "POI": "Albin O. Kuhn Library & Gallery",
+        "Service": "Screening Room",
+        "Floor": 2,
+        "RoomNum": 258
+        },
+        {
+        "POI": "Albin O. Kuhn Library & Gallery",
+        "Service": "Serials Office",
+        "Floor": 2,
+        "RoomNum": 240
+        },
+        {
+        "POI": "Albin O. Kuhn Library & Gallery",
+        "Service": "American Society for Microbiology (ASM) Collection",
+        "Floor": 3,
+        "RoomNum": 354
+        },
+        {
+        "POI": "Albin O. Kuhn Library & Gallery",
+        "Service": "Children's Science Collection",
+        "Floor": 3,
+        "RoomNum": ""
+        },
+        {
+        "POI": "Albin O. Kuhn Library & Gallery",
+        "Service": "Library Administrative Offices",
+        "Floor": 3,
+        "RoomNum": 353
+        },
+        {
+        "POI": "Albin O. Kuhn Library & Gallery",
+        "Service": "Science Archives",
+        "Floor": 3,
+        "RoomNum": 354
+        },
+        {
+        "POI": "Albin O. Kuhn Library & Gallery",
+        "Service": "Assistive Technology",
+        "Floor": 4,
+        "RoomNum": 455
+        },
+        {
+        "POI": "Albin O. Kuhn Library & Gallery",
+        "Service": "Computer Lab",
+        "Floor": "",
+        "RoomNum": ""
+        },
+        {
+        "POI": "Albin O. Kuhn Library & Gallery",
+        "Service": "Conference Room",
+        "Floor": "",
+        "RoomNum": 767
+        },
+        {
+        "POI": "Albin O. Kuhn Library & Gallery",
+        "Service": "President's Room",
+        "Floor": "",
+        "RoomNum": 768
         }
+      
 ]
 }

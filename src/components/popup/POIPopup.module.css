@@ -16,6 +16,10 @@
   overflow: hidden;
 }
 
+.bottomPopup h3{
+  font-size: 40px;
+}
+
 .closeButton {
   position: absolute;
   top: -4px;
@@ -38,14 +42,12 @@
   overflow-y: auto;
   max-height: 150px;
   margin-top: 8px;
-  margin-bottom: 12px;
-    flex-direction: column;
+  flex-direction: column;
   border-collapse: collapse;
 }
 
 .servicesContainer th{
   padding-top: 5px;
-  padding-bottom: 5px;
   padding-left: 5px;
   padding-right: 10px;
 }
