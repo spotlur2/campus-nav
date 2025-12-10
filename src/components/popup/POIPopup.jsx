@@ -31,8 +31,8 @@ export default function POIPopup({ poiName, poiData, onClose, onNavigate, loadin
       <button onClick={onClose} className={style.closeButton}>×</button>
       <h3>{poiName}</h3>
       {poiData.description && <p>{poiData.description}</p>}
-      {poiData.floor && <p>Floor: {poiData.floor}</p>}
-      {poiData.room && <p>Room Number: {poiData.room}</p>}
+      {poiData.Floor && <p>Floor: {poiData.Floor}</p>}
+      {poiData.Room && <p>Room Number: {poiData.Room}</p>}
 
       {poiData.hours && typeof poiData.hours === 'object' && (
         <div className={style.hoursContainer}>

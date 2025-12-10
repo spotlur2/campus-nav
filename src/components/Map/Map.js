@@ -186,7 +186,7 @@ export default function Map({ selectedPOI: externalPOI }) {
       const poiCoords = POIS.find(p => p.name === poiName)?.center || null;
 
       // use id from Firebase document if available
-      const poiId = data.id || poiName;
+      const poiId = data.ID || data.id;
 
       setPoiState({ name: poiName, id: poiId, data, coords: poiCoords });
     } catch (err) {
